@@ -1,6 +1,6 @@
 import { Button } from "react-native";
-import { SafeAreaView, StyleSheet, Image } from "react-native";
-
+import { StyleSheet, Image } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 export default function Home({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
@@ -8,7 +8,7 @@ export default function Home({ navigation }) {
       <Button
         color={"#d52a1d"}
         title="Get Started"
-        onPress={() => navigation.navigate("Workstations")}
+        onPress={() => navigation.navigate("ProductList")}
       />
     </SafeAreaView>
   );
