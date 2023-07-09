@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, TouchableHighlight, View } from "react-native";
 import { StyleSheet, Image } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -20,7 +20,7 @@ const products = [
   { id: 6, name: "PB 70", image: require("../assets/products/PB_70.jpg") },
 ];
 
-export default function ProductList() {
+export default function ProductList({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.main}>
@@ -28,18 +28,26 @@ export default function ProductList() {
         <ScrollView
           style={styles.scroll}
           contentContainerStyle={{
-            paddingBottom: 140,
+            paddingBottom: 0,
           }}
         >
           <View style={styles.cardContainer}>
             {products.map((product) => {
               return (
-                <View style={styles.card} key={product.id}>
-                  <Image style={styles.image} source={product.image} />
-                  <View style={styles.cardBottom}>
-                    <Text style={styles.cardText}>{product.name}</Text>
+                <TouchableHighlight
+                  style={styles.card}
+                  key={product.id}
+                  onPress={() => {
+                    navigation.navigate("Workstations", { name: product.name });
+                  }}
+                >
+                  <View style={{ width: "100%", height: "100%" }}>
+                    <Image style={styles.image} source={product.image} />
+                    <View style={styles.cardBottom}>
+                      <Text style={styles.cardText}>{product.name}</Text>
+                    </View>
                   </View>
-                </View>
+                </TouchableHighlight>
               );
             })}
           </View>
@@ -57,7 +65,7 @@ const styles = StyleSheet.create({
   },
   scroll: {
     // flex: 1,
-    backgroundColor: "red",
+    // backgroundColor: "red",/
   },
   main: {
     flex: 1,
