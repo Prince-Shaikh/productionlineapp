@@ -1,5 +1,6 @@
 import { ScrollView, Text, TouchableHighlight, View } from "react-native";
 import { StyleSheet, Image } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -23,36 +24,60 @@ const products = [
 export default function ProductList({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.text}>SELECT PRODUCT</Text>
-        <ScrollView
-          style={styles.scroll}
-          contentContainerStyle={{
-            paddingBottom: 0,
-          }}
-        >
-          <View style={styles.cardContainer}>
-            {products.map((product) => {
-              return (
-                <TouchableHighlight
-                  style={styles.card}
-                  key={product.id}
-                  onPress={() => {
-                    navigation.navigate("Workstations", { name: product.name });
-                  }}
-                >
-                  <View style={{ width: "100%", height: "100%" }}>
-                    <Image style={styles.image} source={product.image} />
-                    <View style={styles.cardBottom}>
-                      <Text style={styles.cardText}>{product.name}</Text>
-                    </View>
-                  </View>
-                </TouchableHighlight>
-              );
-            })}
+      <LinearGradient
+        colors={["#e80808", "#082f6f"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0.5, y: 1 }}
+        style={styles.container}
+      >
+        <View style={styles.main}>
+          <View
+            style={{
+              backgroundColor: "#191818",
+              width: "100%",
+              padding: 10,
+              elevation: 10,
+              shadowOffset: { width: 1, height: 1 },
+              shadowColor: "#333",
+              shadowOpacity: 0.8,
+              shadowRadius: 10,
+            }}
+          >
+            <Text style={styles.text}>SELECT PRODUCT</Text>
           </View>
-        </ScrollView>
-      </View>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+            style={styles.scroll}
+            contentContainerStyle={{
+              paddingBottom: 0,
+            }}
+          >
+            <View style={styles.cardContainer}>
+              {products.map((product) => {
+                return (
+                  <TouchableHighlight
+                    style={styles.card}
+                    key={product.id}
+                    onPress={() => {
+                      navigation.navigate("Workstations", {
+                        name: product.name,
+                      });
+                    }}
+                  >
+                    <View style={{ width: "100%", height: "100%" }}>
+                      <Image style={styles.image} source={product.image} />
+                      <View style={styles.cardBottom}>
+                        <Text style={styles.cardText}>{product.name}</Text>
+                      </View>
+                    </View>
+                  </TouchableHighlight>
+                );
+              })}
+            </View>
+          </ScrollView>
+        </View>
+      </LinearGradient>
     </SafeAreaView>
   );
 }
@@ -60,7 +85,7 @@ export default function ProductList({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 8,
+    // padding: 8,
     paddingBottom: 0,
   },
   scroll: {
@@ -71,13 +96,20 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-start",
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
   },
-  text: { fontSize: 32, fontWeight: "800", marginVertical: 24 },
+  text: {
+    textAlign: "center",
+    fontSize: 32,
+    fontWeight: "800",
+    marginVertical: 24,
+    color: "#fff",
+  },
   cardContainer: {
+    marginTop: 16,
     // flex: 1,
     // flexGrow: 1,
-    // justifyContent: "center",
+    justifyContent: "center",
     flexDirection: "row",
     flexWrap: "wrap",
     width: "100%",
@@ -91,9 +123,9 @@ const styles = StyleSheet.create({
     padding: 8,
     justifyContent: "space-between",
     alignItems: "center",
-    minHeight: 250,
-    maxHeight: 450,
-    width: "45%",
+    minHeight: 200,
+    maxHeight: 350,
+    width: "40%",
     height: "45%",
     backgroundColor: "white",
     borderRadius: 8,
